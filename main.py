@@ -2,9 +2,9 @@ import subprocess, os, time, numpy
 from subprocess import CREATE_NEW_CONSOLE
 
 def mainProgram(inputs):
-    element1 = "ch10.txt"
-    element2 = "s1223.txt"
-    element3 = "s1223.txt"
+    element1 = "ah79b.txt"      #taken from airfoiltools.com
+    element2 = "e423.txt"       #taken from airfoiltools.com
+    #element3 = "e423.txt"       #taken from airfoiltools.com
     
     newInputs = numpy.round(inputs, 3)
     #print("These are the new inputs:", newInputs)
@@ -17,10 +17,10 @@ def mainProgram(inputs):
     e2X = newInputs[4]
     e2Y = newInputs[5]
     
-    e3Scale = newInputs[6]
-    e3Angle = newInputs[7]
-    e3X = newInputs[8]
-    e3Y = newInputs[9]
+    #e3Scale = newInputs[6]
+    #e3Angle = newInputs[7]
+    #e3X = newInputs[8]
+    #e3Y = newInputs[9]
     
     print("New E1 Scale:", e1Scale)
     print("New E1 Angle:", e1Angle)
@@ -28,16 +28,16 @@ def mainProgram(inputs):
     print("New E2 Angle:", e2Angle)
     print("New E2 X-Position:", e2X)
     print("New E2 Y-Position:", e2Y)
-    print("New E3 Scale:", e3Scale)
-    print("New E3 Angle:", e3Angle)
-    print("New E3 X-Position:", e3X)
-    print("New E3 Y-Position:", e3Y)
+    #print("New E3 Scale:", e3Scale)
+    #print("New E3 Angle:", e3Angle)
+    #print("New E3 X-Position:", e3X)
+    #print("New E3 Y-Position:", e3Y)
     
     #airset
     program1 = "airset.exe" 
     text1 = ("Adde\n" + element1 + "\nS\n" + str(e1Scale) + "\nA\n" + str(e1Angle) + "\n\n"
              + element2 + "\nS\n" + str(e2Scale) + "\nA\n" + str(e2Angle) + "\nM\n" + str(e2X) + "\n" + str(e2Y) + "\n\n"
-             + element3 + "\nS\n" + str(e3Scale) + "\nA\n" + str(e3Angle) + "\nM\n" + str(e3X) + "\n" + str(e3Y)
+             #+ element3 + "\nS\n" + str(e3Scale) + "\nA\n" + str(e3Angle) + "\nM\n" + str(e3X) + "\n" + str(e3Y)
              + "\n\n\nSave\nblade\nY\n")
 
     subprocess.run(program1, input=text1, creationflags=CREATE_NEW_CONSOLE, text=True)
@@ -45,7 +45,7 @@ def mainProgram(inputs):
     #mset
     program2 = "mset.exe"
     #NEED TO CHANGE NUMBER OF \N FOR EVERY ELEMENT ADDED
-    text2 = "1\n0\n2\n\n\n\n3\n4\n14\n"
+    text2 = "1\n0\n2\n\n\n3\n4\n14\n"
     #str(e2Angle/2)
     
     subprocess.run(program2, input=text2, creationflags=CREATE_NEW_CONSOLE, text=True)
@@ -57,7 +57,7 @@ def mainProgram(inputs):
 
     subprocess.run(program3, input=text3, creationflags=CREATE_NEW_CONSOLE, text=True)
 
-    #change REYNIN to 5.000E+05
+    #change REYNIN to 4.000E+05
     with open("mses", "r") as file1:
         filedata1 = file1.read()
     filedata1 = filedata1.replace("0.000E+00", "5.000E+05")
